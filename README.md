@@ -9,7 +9,7 @@ Simplify the `Pokemons` and `PokemonItem` components by removing the redundant s
 
 ## Step 2
 
-Use a specific hook to prevent the visible pokemons list from being re-calculated on every render.
+Use a specific hook to prevent the visible Pokemons list from being re-calculated on every render.
 
 ## Step 3
 
