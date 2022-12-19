@@ -1,26 +1,19 @@
-import { useEffect, useState } from "react";
 import { Pokemon } from "./types";
 
 export function PokemonItem({
   pokemon,
   onChange,
-  caught,
+  isCaught,
 }: {
   pokemon: Pokemon;
   onChange: (pokemon: Pokemon, caught: boolean) => void;
-  caught: boolean;
+  isCaught: boolean;
 }) {
-  const [isCaught, setCaught] = useState(caught);
-
-  useEffect(() => {
-    onChange(pokemon, isCaught);
-  }, [isCaught]);
-
   return (
     <div className="pokemon-row">
       <span
         onClick={() => {
-          setCaught((prevCaught) => !prevCaught);
+          onChange(pokemon, !isCaught);
         }}
       >
         {pokemon.name}
@@ -29,7 +22,7 @@ export function PokemonItem({
         type="checkbox"
         checked={isCaught}
         onChange={() => {
-          setCaught((prevCaught) => !prevCaught);
+          onChange(pokemon, !isCaught);
         }}
       />
     </div>

@@ -1,47 +1,30 @@
-import React, { ReactElement, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { PokemonItem } from "./PokemonItem";
 import { Pokemon } from "./types";
+import { useData } from "./useData";
 
 let numberOfTimes = 0;
 
 export function Pokemons() {
-  const [pokemons, setPokemons] = useState<Pokemon[]>([]);
-  const [loading, setLoading] = useState(true);
   const [caughtPokemons, setCaughtPokemons] = useState<Pokemon[]>([]);
-  const [visiblePokemons, setVisiblePokemons] = useState<Pokemon[]>([]);
   const [showOnlyUnacughtPokemons, setShowOnlyUncaughtPokemons] =
     useState(false);
-  const [aside, setAside] = useState<ReactElement | undefined>();
+  const {
+    isLoading,
+    data: { results: pokemons = [] },
+  } = useData<{ results: Pokemon[] }>(
+    "https://pokeapi.co/api/v2/pokemon?limit=151"
+  );
 
-  useEffect(() => {
-    fetch("https://pokeapi.co/api/v2/pokemon?limit=151")
-      .then((res) => res.json())
-      .then((data) => {
-        setPokemons(data.results);
-        setLoading(false);
-      });
-  }, []);
-
-  useEffect(() => {
-    console.log(`I've been called ${numberOfTimes} times`);
+  const visiblePokemons = React.useMemo(() => {
     if (showOnlyUnacughtPokemons) {
-      setVisiblePokemons(
-        pokemons.filter((pokemon) => !caughtPokemons.includes(pokemon))
-      );
-    } else {
-      setVisiblePokemons(pokemons);
+      return pokemons.filter((pokemon) => !caughtPokemons.includes(pokemon));
     }
+
+    return pokemons;
   }, [caughtPokemons, pokemons, showOnlyUnacughtPokemons]);
 
-  useEffect(() => {
-    setAside(
-      <aside>
-        Uncaught Pokemons: {pokemons.length - caughtPokemons.length}
-      </aside>
-    );
-  }, [pokemons, caughtPokemons]);
-
-  if (loading) {
+  if (isLoading) {
     return <div>Loading...</div>;
   }
 
@@ -61,7 +44,9 @@ export function Pokemons() {
 
   return (
     <div>
-      {aside}
+      <aside>
+        Uncaught Pokemons: {pokemons.length - caughtPokemons.length}
+      </aside>
       <div>
         <span>Show only uncaught pokemons</span>
         <input
@@ -74,7 +59,7 @@ export function Pokemons() {
           key={pokemon.name}
           pokemon={pokemon}
           onChange={handlePokemonCaught}
-          caught={caughtPokemons.includes(pokemon)}
+          isCaught={caughtPokemons.includes(pokemon)}
         />
       ))}
     </div>
