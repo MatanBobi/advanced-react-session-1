@@ -1,5 +1,7 @@
 # Advanced React Session 1
 
+To start, run `npm install` and then `npm run dev`.
+
 ## Step 1
 
 The `Pokemons` component displays a list of Pokemons. When the "Show only uncaught Pokemons" checkbox is ticked, caught pokemons are not visible in the list.  
