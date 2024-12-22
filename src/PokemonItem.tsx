@@ -17,8 +17,9 @@ export function PokemonItem({
   }, [isCaught]);
 
   return (
-    <div className="pokemon-row">
+    <div className="px-4 py-5 border-t border-t-slate-300 cursor-pointer hover:bg-slate-200 font-medium dark:border-t-gray-600 dark:text-white dark:hover:bg-gray-700 dark:bg-gray-800">
       <span
+        className="capitalize"
         onClick={() => {
           setCaught((prevCaught) => !prevCaught);
         }}
@@ -28,6 +29,7 @@ export function PokemonItem({
       <input
         type="checkbox"
         checked={isCaught}
+        className="mx-2"
         onChange={() => {
           setCaught((prevCaught) => !prevCaught);
         }}
