@@ -63,12 +63,15 @@ export function Pokemons() {
     <div className="max-h-screen flex flex-col border-r border-r-slate-300 dark:border-r-slate-600 dark:bg-gray-800 dark:text-white overflow-auto">
       {aside}
       <div>
-        <span>Show only uncaught pokemons</span>
-        <input
-          className="mx-2"
-          type="checkbox"
-          onChange={() => setShowOnlyUncaughtPokemons((prev) => !prev)}
-        />
+        <label>
+          Show only uncaught pokemons
+          <input
+            className="mx-2 cursor-pointer"
+            type="checkbox"
+            checked={showOnlyUnacughtPokemons}
+            onChange={() => setShowOnlyUncaughtPokemons((prev) => !prev)}
+          />
+        </label>
       </div>
       {visiblePokemons.map((pokemon) => (
         <PokemonItem
