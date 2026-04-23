@@ -26,7 +26,7 @@ export function Pokemons() {
     console.log(`I've been called ${numberOfTimes} times`);
     if (showOnlyUnacughtPokemons) {
       setVisiblePokemons(
-        pokemons.filter((pokemon) => !caughtPokemons.includes(pokemon))
+        pokemons.filter((pokemon) => !caughtPokemons.includes(pokemon)),
       );
     } else {
       setVisiblePokemons(pokemons);
@@ -37,7 +37,7 @@ export function Pokemons() {
     setAside(
       <aside className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-sm font-semibold bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400">
         Uncaught Pokemons: {pokemons.length - caughtPokemons.length}
-      </aside>
+      </aside>,
     );
   }, [pokemons, caughtPokemons]);
 
@@ -45,7 +45,9 @@ export function Pokemons() {
     return (
       <div className="flex flex-col items-center justify-center h-64 gap-4">
         <div className="spinner" />
-        <p className="text-slate-500 dark:text-slate-400 text-sm font-medium">Loading Pokémon...</p>
+        <p className="text-slate-500 dark:text-slate-400 text-sm font-medium">
+          Loading Pokémon...
+        </p>
       </div>
     );
   }
