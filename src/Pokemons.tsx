@@ -27,7 +27,9 @@ export function Pokemons() {
     return (
       <div className="flex flex-col items-center justify-center h-64 gap-4">
         <div className="spinner" />
-        <p className="text-slate-500 dark:text-slate-400 text-sm font-medium">Loading Pokémon...</p>
+        <p className="text-slate-500 dark:text-slate-400 text-sm font-medium">
+          Loading Pokémon...
+        </p>
       </div>
     );
   }
@@ -74,7 +76,7 @@ export function Pokemons() {
             key={pokemon.name}
             pokemon={pokemon}
             onChange={handlePokemonCaught}
-            caught={caughtPokemons.includes(pokemon)}
+            isCaught={caughtPokemons.includes(pokemon)}
           />
         ))}
       </div>
