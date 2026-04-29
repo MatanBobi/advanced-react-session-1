@@ -5,23 +5,23 @@ import { useData } from "./useData";
 
 export function Pokemons() {
   const [caughtPokemons, setCaughtPokemons] = useState<Pokemon[]>([]);
-  const [showOnlyUnacughtPokemons, setShowOnlyUncaughtPokemons] =
+  const [showOnlyUncaughtPokemons, setShowOnlyUncaughtPokemons] =
     useState(false);
 
   const {
     isLoading,
     data: { results: pokemons = [] },
   } = useData<{ results: Pokemon[] }>(
-    "https://pokeapi.co/api/v2/pokemon?limit=151"
+    "https://pokeapi.co/api/v2/pokemon?limit=151",
   );
 
   const visiblePokemons = React.useMemo(() => {
-    if (showOnlyUnacughtPokemons) {
+    if (showOnlyUncaughtPokemons) {
       return pokemons.filter((pokemon) => !caughtPokemons.includes(pokemon));
     }
 
     return pokemons;
-  }, [caughtPokemons, pokemons, showOnlyUnacughtPokemons]);
+  }, [caughtPokemons, pokemons, showOnlyUncaughtPokemons]);
 
   if (isLoading) {
     return (
@@ -64,7 +64,7 @@ export function Pokemons() {
             <input
               className="toggle-checkbox"
               type="checkbox"
-              checked={showOnlyUnacughtPokemons}
+              checked={showOnlyUncaughtPokemons}
               onChange={() => setShowOnlyUncaughtPokemons((prev) => !prev)}
             />
           </label>
