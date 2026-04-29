@@ -9,7 +9,7 @@ export function Pokemons() {
   const [loading, setLoading] = useState(true);
   const [caughtPokemons, setCaughtPokemons] = useState<Pokemon[]>([]);
   const [visiblePokemons, setVisiblePokemons] = useState<Pokemon[]>([]);
-  const [showOnlyUnacughtPokemons, setShowOnlyUncaughtPokemons] =
+  const [showOnlyUncaughtPokemons, setShowOnlyUncaughtPokemons] =
     useState(false);
   const [aside, setAside] = useState<ReactElement | undefined>();
 
@@ -24,14 +24,14 @@ export function Pokemons() {
 
   useEffect(() => {
     console.log(`I've been called ${numberOfTimes} times`);
-    if (showOnlyUnacughtPokemons) {
+    if (showOnlyUncaughtPokemons) {
       setVisiblePokemons(
         pokemons.filter((pokemon) => !caughtPokemons.includes(pokemon)),
       );
     } else {
       setVisiblePokemons(pokemons);
     }
-  }, [caughtPokemons, pokemons, showOnlyUnacughtPokemons]);
+  }, [caughtPokemons, pokemons, showOnlyUncaughtPokemons]);
 
   useEffect(() => {
     setAside(
@@ -80,7 +80,7 @@ export function Pokemons() {
             <input
               className="toggle-checkbox"
               type="checkbox"
-              checked={showOnlyUnacughtPokemons}
+              checked={showOnlyUncaughtPokemons}
               onChange={() => setShowOnlyUncaughtPokemons((prev) => !prev)}
             />
           </label>
